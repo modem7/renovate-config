@@ -1,0 +1,35 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "angular specific settings",
+  "packageRules": [
+    {
+      "description": "Require typescript minor approval for angular",
+      "matchPackageNames": ["typescript"],
+      "matchUpdateTypes": ["minor"],
+      "dependencyDashboardApproval": true
+    },
+    {
+      "description": "Do not automerge and group angular updates",
+      "matchSourceUrls": [
+        "https://github.com/angular/angular",
+        "https://github.com/angular/angular-cli",
+        "https://github.com/angular/components"
+      ],
+      "automerge": false,
+      "groupName": "angular"
+    },
+    {
+      "description": "Add jest-preset-angular major update to Jest monorepo",
+      "matchSourceUrlPrefixes": ["https://github.com/thymikee/jest-preset-angular"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "jest monorepo"
+    },
+    {
+      "description": "Do not automerge nx, needs migration",
+      "matchSourceUrls": ["https://github.com/nrwl/nx"],
+      "automerge": false,
+      "stabilityDays": 0,
+      "prNotPendingHours": 25
+    }
+  ]
+}

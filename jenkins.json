@@ -1,0 +1,24 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "jenkins specific settings",
+  "packageRules": [
+    {
+      "description": "Automerge minor and lower updates",
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "automerge": true
+    },
+    {
+      "description": "Automerge minor updates with pr",
+      "matchUpdateTypes": ["minor"],
+      "automergeType": "pr"
+    },
+    {
+      "description": "No approval for jenkins bom",
+      "matchSourceUrlPrefixes": [
+        "https://github.com/jenkinsci/bom",
+        "https://github.com/jenkinsci/plugin-pom"
+      ],
+      "dependencyDashboardApproval": false
+    }
+  ]
+}

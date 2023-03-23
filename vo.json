@@ -1,0 +1,23 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "packageRules": [
+    {
+      "matchPackageNames": ["visualon/images", "@types/vo-app-base"],
+      "matchPackagePatterns": ["^@vsaf\\/", "^VisualOn\\.", "(^|\\/)visualon\\/(builder|buildpack)$"],
+      "stabilityDays": 0,
+      "prNotPendingHours": 25
+    },
+    {
+      "matchPackagePatterns": ["^VisualOn\\.Microsoft\\."],
+      "groupName": "visualon-microsoft monorepo"
+    },
+    {
+      "matchPackageNames": ["visualon/images"],
+      "groupName": "visualon images"
+    },
+    {
+      "matchPackagePatterns": ["(^|\\/)visualon\\/(builder|buildpack)$"],
+      "dependencyDashboardApproval": false
+    }
+  ]
+}

@@ -1,0 +1,160 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "packageRules": [
+    {
+      "matchSourceUrlPrefixes": ["https://github.com/NLog/"],
+      "groupName": "nlog packages",
+      "separateMinorPatch": false
+    },
+    {
+      "matchSourceUrlPrefixes": ["https://github.com/adamralph/minver"],
+      "groupName": "minver packages"
+    },
+    {
+      "matchPackagePatterns": ["^mcr\\.microsoft\\.com\\/dotnet\\/"],
+      "groupName": "dotnet docker images"
+    },
+    {
+      "matchSourceUrlPrefixes": ["https://github.com/deepsweet/start"],
+      "groupName": "start monorepo"
+    },
+    {
+      "matchSourceUrlPrefixes": ["https://github.com/unitycontainer/"],
+      "groupName": "unity packages"
+    },
+    {
+      "matchSourceUrlPrefixes": ["https://github.com/theramis/Snapper"],
+      "groupName": "snapper packages"
+    },
+    {
+      "matchPackagePatterns": ["(^|/)renovate$"],
+      "groupName": "renovatebot",
+      "dependencyDashboardApproval": false,
+      "automerge": true
+    },
+    {
+      "matchSourceUrlPrefixes": ["https://github.com/microsoft/msbuild"],
+      "groupName": "MSBuild monorepo"
+    },
+    {
+      "matchSourceUrlPrefixes": [
+        "https://github.com/microsoft/fluentui",
+        "https://github.com/OfficeDev/office-ui-fabric-react"
+      ],
+      "groupName": "Fluent UI monorepo"
+    },
+    {
+      "matchPackageNames": ["@types/react", "@types/react-dom"],
+      "groupName": "react monorepo"
+    },
+    {
+      "matchPackageNames": ["prettier"],
+      "matchPackagePatterns": ["^@prettier\\/", "^prettier-plugin-"],
+      "groupName": "prettier packages"
+    },
+    {
+      "matchSourceUrlPrefixes": [
+        "https://github.com/tunnelvisionlabs/antlr4ts"
+      ],
+      "groupName": "antlr4ts monorepo"
+    },
+    {
+      "description": "Harbor chart and images",
+      "matchDatasources": ["helm", "docker"],
+      "matchPackageNames": ["harbor"],
+      "matchPackagePatterns": ["^goharbor\\/", "\\/harbor-"],
+      "groupName": "Harbor",
+      "additionalBranchPrefix": "",
+      "group": { "commitMessageTopic": "{{{groupName}}} group" }
+    },
+    {
+      "description": "PostgreSQL chart and images",
+      "matchDatasources": ["helm", "docker"],
+      "matchPackageNames": ["postgres"],
+      "matchPackagePatterns": ["(^|\\/)postgresql$"],
+      "groupName": "PostgreSQL",
+      "additionalBranchPrefix": "",
+      "group": { "commitMessageTopic": "{{{groupName}}} group" },
+      "separateMinorPatch": false
+    },
+    {
+      "description": "MariaDB chart and images",
+      "matchDatasources": ["helm", "docker"],
+      "matchPackagePatterns": ["(^|\\/)mariadb$"],
+      "groupName": "MariaDB",
+      "additionalBranchPrefix": "",
+      "group": { "commitMessageTopic": "{{{groupName}}} group" },
+      "separateMinorPatch": false
+    },
+    {
+      "description": "MinIO chart and images",
+      "matchDatasources": ["helm", "docker"],
+      "matchPackagePatterns": ["(^|\\/)minio$"],
+      "groupName": "MinIO",
+      "additionalBranchPrefix": "",
+      "group": { "commitMessageTopic": "{{{groupName}}} group" },
+      "separateMinorPatch": false
+    },
+    {
+      "description": "Traefik chart and images",
+      "matchDatasources": ["helm", "docker"],
+      "matchPackagePatterns": ["(^|\\/)traefik$"],
+      "groupName": "Traefik",
+      "additionalBranchPrefix": "",
+      "group": { "commitMessageTopic": "{{{groupName}}} group" },
+      "separateMinorPatch": false
+    },
+    {
+      "description": "Redis chart and images",
+      "matchDatasources": ["helm", "docker"],
+      "matchPackagePatterns": ["(^|\\/)redis(?:-cluster)?$"],
+      "groupName": "Redis",
+      "additionalBranchPrefix": "",
+      "group": { "commitMessageTopic": "{{{groupName}}} group" },
+      "separateMinorPatch": false
+    },
+    {
+      "description": "CoreDNS chart and images",
+      "matchDatasources": ["helm", "docker"],
+      "matchPackagePatterns": ["(^|\\/)coredns$"],
+      "groupName": "CoreDNS",
+      "additionalBranchPrefix": "",
+      "group": { "commitMessageTopic": "{{{groupName}}} group" },
+      "separateMinorPatch": false
+    },
+    {
+      "description": "phpMyAdmin chart and images",
+      "matchDatasources": ["helm", "docker"],
+      "matchPackagePatterns": ["(^|\\/)phpmyadmin$"],
+      "groupName": "phpMyAdmin",
+      "additionalBranchPrefix": "",
+      "group": { "commitMessageTopic": "{{{groupName}}} group" },
+      "separateMinorPatch": false
+    },
+    {
+      "description": "pgAdmin chart and images",
+      "matchDatasources": ["helm", "docker"],
+      "matchPackagePatterns": ["(^|\\/)pgadmin4$"],
+      "groupName": "pgAdmin",
+      "additionalBranchPrefix": "",
+      "group": { "commitMessageTopic": "{{{groupName}}} group" },
+      "separateMinorPatch": false
+    },
+    {
+      "description": "Gitea chart and images",
+      "matchDatasources": ["helm", "docker"],
+      "matchPackagePatterns": ["(^|\\/)gitea$"],
+      "groupName": "Gitea",
+      "additionalBranchPrefix": "",
+      "group": { "commitMessageTopic": "{{{groupName}}} group" },
+      "separateMinorPatch": false
+    },
+    {
+      "description": "OpenSearch charts",
+      "matchSourceUrlPrefixes": [
+        "https://github.com/opensearch-project/helm-charts"
+      ],
+      "groupName": "OpenSearch charts"
+    }
+  ]
+}

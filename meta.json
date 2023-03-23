@@ -1,0 +1,105 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["(^|\\/)traefik$"],
+      "matchDatasources": ["docker"],
+      "sourceUrl": "https://github.com/containous/traefik"
+    },
+    {
+      "matchPackagePatterns": ["(^|\\/)rook\\/"],
+      "matchDatasources": ["docker"],
+      "sourceUrl": "https://github.com/rook/rook"
+    },
+    {
+      "matchPackagePatterns": ["(^|atlassian\\/)jira-software$"],
+      "matchDatasources": ["docker"],
+      "sourceUrl": "https://confluence.atlassian.com/jirasoftware/jira-software-release-notes"
+    },
+    {
+      "matchPackagePatterns": ["(^|atlassian\\/)bitbucket-server$"],
+      "matchDatasources": ["docker"],
+      "sourceUrl": "https://confluence.atlassian.com/bitbucketserver/bitbucket-server-release-notes"
+    },
+    {
+      "matchPackageNames": ["jenkins"],
+      "matchDatasources": ["docker"],
+      "sourceUrl": "https://jenkins.io/changelog-stable"
+    },
+    {
+      "matchPackageNames": ["gitea/gitea"],
+      "matchDatasources": ["docker"],
+      "sourceUrl": "https://github.com/go-gitea/gitea"
+    },
+    {
+      "matchPackagePatterns": ["^goharbor\\/"],
+      "matchDatasources": ["docker"],
+      "sourceUrl": "https://github.com/goharbor/harbor"
+    },
+    {
+      "matchPackageNames": ["dpage/pgadmin4"],
+      "matchDatasources": ["docker"],
+      "sourceUrl": "https://www.pgadmin.org"
+    },
+    {
+      "matchPackagePatterns": ["^(?:amd64\\/)?nextcloud$"],
+      "matchDatasources": ["docker"],
+      "sourceUrl": "https://nextcloud.com/changelog"
+    },
+    {
+      "matchPackagePatterns": ["^(?:amd64\\/)?nextcloud$"],
+      "matchDatasources": ["docker"],
+      "matchCurrentVersion": "^20",
+      "sourceUrl": "https://nextcloud.com/changelog/#latest20"
+    },
+    {
+      "matchPackagePatterns": ["^(?:amd64\\/)?nextcloud$"],
+      "matchDatasources": ["docker"],
+      "matchCurrentVersion": "^21",
+      "sourceUrl": "https://nextcloud.com/changelog/#latest21"
+    },
+    {
+      "matchPackagePatterns": ["^(?:amd64\\/)?nextcloud$"],
+      "matchDatasources": ["docker"],
+      "matchCurrentVersion": "^22",
+      "sourceUrl": "https://nextcloud.com/changelog/#latest22"
+    },
+    {
+      "matchPackagePatterns": ["^(?:amd64\\/)?nextcloud$"],
+      "matchDatasources": ["docker"],
+      "matchCurrentVersion": "^23",
+      "sourceUrl": "https://nextcloud.com/changelog/#latest23"
+    },
+    {
+      "matchPackagePatterns": ["^(?:amd64\\/)?nextcloud$"],
+      "matchDatasources": ["docker"],
+      "matchCurrentVersion": "^24",
+      "sourceUrl": "https://nextcloud.com/changelog/#latest24"
+    },
+    {
+      "matchPackageNames": ["harbor"],
+      "matchDatasources": ["helm"],
+      "sourceUrl": "https://github.com/goharbor/harbor-helm"
+    },
+    {
+      "matchPackagePatterns": ["^certbot\\/"],
+      "matchDatasources": ["docker"],
+      "sourceUrl": "https://github.com/certbot/certbot"
+    },
+    {
+      "matchPackageNames": ["coredns/coredns"],
+      "matchDatasources": ["docker"],
+      "sourceUrl": "https://github.com/coredns/coredns"
+    },
+    {
+      "matchPackageNames": ["neilpang/acme.sh"],
+      "matchDatasources": "docker",
+      "sourceUrl": "https://github.com/acmesh-official/acme.sh"
+    },
+    {
+      "matchPackageNames": ["IKVM"],
+      "matchDatasources": "nuget",
+      "sourceUrl": "https://github.com/ikvm-revived/ikvm"
+    }
+  ]
+}

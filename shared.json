@@ -1,0 +1,199 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":maintainLockFilesWeekly",
+    "docker:enableMajor",
+    "github>whitesource/merge-confidence:beta",
+    "github>modem7/renovate-config:meta",
+    "github>modem7/renovate-config:fixes",
+    "github>modem7/renovate-config:groups",
+    "github>modem7/renovate-config:replacements"
+  ],
+  "automergeType": "branch",
+  "timezone": "Europe/London",
+  "internalChecksFilter": "strict",
+  "semanticCommits": "enabled",
+  "postUpdateOptions": ["yarnDedupeHighest"],
+  "separateMinorPatch": true,
+  "separateMajorMinor": true,
+  "branchNameStrict": false,
+  "ignorePresets": [":ignoreModulesAndTests", "helpers:disableTypesNodeMajor"],
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "**/vendor/**",
+    "**/examples/**",
+    "**/__tests__/**",
+    "**/tests/**"
+  ],
+  "lockFileMaintenance": {
+    "automerge": true
+  },
+  "packageRules": [
+    {
+      "description": "Require stability days",
+      "matchUpdateTypes": ["major", "minor"],
+      "excludePackagePatterns": [
+        "^renovate(bot)?($|\\/)",
+        "\\/renovate(?:bot)?$"
+      ],
+      "stabilityDays": 3,
+      "prNotPendingHours": 73
+    },
+    {
+      "description": "Require dashboard approval for major updates except Renovate",
+      "excludePackagePatterns": [
+        "^renovate(bot)?($|\\/)",
+        "\\/renovate(?:bot)?$",
+        "containerbase/buildpack",
+        "ghcr.io/containerbase/buildpack",
+        "containerbase/base",
+        "ghcr.io/containerbase/base"
+      ],
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true
+    },
+    {
+      "description": "No dashboard approval for major updates of github actions",
+      "matchManagers": ["github-actions"],
+      "dependencyDashboardApproval": false
+    },
+    {
+      "matchManagers": ["dockerfile", "droneci"],
+      "pinDigests": true
+    },
+    {
+      "matchManagers": ["droneci"],
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "automerge": true
+    },
+    {
+      "matchFiles": ["Jenkinsfile"],
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "automerge": true
+    },
+    {
+      "description": "Automerge dev deps minor and lower",
+      "matchDepTypes": ["devDependencies", "action"],
+      "extends": [":automergeMinor", "schedule:nonOfficeHours"]
+    },
+    {
+      "description": "Automerge dotnet dev packages (by source urls)",
+      "matchSourceUrlPrefixes": [
+        "https://github.com/coverlet-coverage/coverlet",
+        "https://github.com/danielpalme/ReportGenerator",
+        "https://github.com/dotnet/msbuild",
+        "https://github.com/microsoft/vstest",
+        "https://github.com/adamralph/minver",
+        "https://github.com/nunit/",
+        "https://github.com/theramis/Snapper"
+      ],
+      "matchUpdateTypes": ["minor", "patch", "digest", "pin"],
+      "automerge": true
+    },
+    {
+      "description": "Automerge dotnet dev packages (by package names)",
+      "matchPackageNames": [
+        "NLog.Schema",
+        "NSubstitute",
+        "NSubstitute.Analyzers.CSharp"
+      ],
+      "matchUpdateTypes": ["minor", "patch", "digest", "pin"],
+      "automerge": true
+    },
+    {
+      "description": "Use replace for peer deps",
+      "matchDepTypes": ["peerDependencies"],
+      "rangeStrategy": "replace"
+    },
+    {
+      "description": "Do not separate Renovate minor and patch",
+      "matchPackagePatterns": ["^renovate(bot)?($|/)"],
+      "separateMinorPatch": false
+    },
+    {
+      "description": "Add ts-jest major update to jest monorepo",
+      "matchSourceUrlPrefixes": ["https://github.com/kulshekhar/ts-jest"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "jest monorepo"
+    },
+    {
+      "description": "Use custom regex versioning for bitnami images",
+      "matchPackagePrefixes": ["gcr.io/bitnami-containers/", "bitnami/"],
+      "matchDatasources": ["docker"],
+      "versioning": "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(:?-(?<compatibility>.*-r)(?<build>\\d+))?$"
+    },
+    {
+      "description": "Use custom regex versioning for k3s",
+      "matchPackageNames": ["k3s"],
+      "matchDatasources": ["github-releases"],
+      "versioning": "regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?<compatibility>\\+k3s)(?<build>\\d+)$"
+    },
+    {
+      "description": "Use other registry for chocolatey packages",
+      "matchPackageNames": ["chocolatey-core.extension", "graphviz.portable"],
+      "matchDatasources": ["nuget"],
+      "registryUrls": ["https://chocolatey.org/api/v2/"]
+    },
+    {
+      "description": "Use `build` semantic commit scope for build deps",
+      "matchDepNames": [
+        "conventional-changelog-conventionalcommits",
+        "node",
+        "semantic-release",
+        "@semantic-release/exec"
+      ],
+      "semanticCommitType": "build"
+    }
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": ["\\.tf$"],
+      "matchStrings": [
+        "\\s+image_[a-z0-9_]+\\s+=\\s+\"(?<packageName>[a-z0-9.\\/-]+)(?::(?<currentValue>[a-z0-9.-]+))?(?:@(?<currentDigest>sha256:[a-f0-9]+))?\"\\s+# renovate:(?: depName=(?<depName>.+?))?(?: versioning=(?<versioning>.+?))?\\s"
+      ],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "{{#if versioning}}{{versioning}}{{else}}docker{{/if}}",
+      "depNameTemplate": "{{#if depName}}{{depName}}{{else}}{{packageName}}{{/if}}"
+    },
+    {
+      "fileMatch": ["^Jenkinsfile$"],
+      "matchStringsStrategy": "any",
+      "matchStrings": [
+        "image '(?<depName>[a-z0-9.\\/-]+)(?::(?<currentValue>[a-z0-9.-]+))?(?:@(?<currentDigest>sha256:[a-f0-9]+))?'",
+        "image \"(?<depName>[a-z0-9.\\/-]+)(?::(?<currentValue>[a-z0-9.-]+))?(?:@(?<currentDigest>sha256:[a-f0-9]+))?\"",
+        "image('(?<depName>[a-z0-9.\\/-]+)(?::(?<currentValue>[a-z0-9.-]+))?(?:@(?<currentDigest>sha256:[a-f0-9]+))?')",
+        "image(\"(?<depName>[a-z0-9.\\/-]+)(?::(?<currentValue>[a-z0-9.-]+))?(?:@(?<currentDigest>sha256:[a-f0-9]+))?\")"
+      ],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "docker"
+    },
+    {
+      "description": "Update install-* Buildpack commands and _VERSION variables in Dockerfiles",
+      "fileMatch": ["(^|/|\\.)Dockerfile$", "(^|/)Dockerfile\\.[^/]*$"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)(?: (?:packageName|lookupName)=(?<packageName>.+?))?( versioning=(?<versioning>.+?))?\\s(ENV|ARG) [A-Z0-9_]+?_VERSION=(?<currentValue>.+?)\\s",
+        "# renovate: datasource=(?<datasource>.+?)(?: (?:packageName|lookupName)=(?<packageName>.+?))?(?: versioning=(?<versioning>.+?))?\\sRUN install-[a-z]+? (?<depName>[a-z0-9-]+?) (?<currentValue>.+?)\\s"
+      ]
+    },
+    {
+      "description": "Update install-* Buildpack commands and _VERSION variables in shell scripts",
+      "fileMatch": ["\\.sh$", "\\.ps1$"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>.+?) depName=(?<depName>.+?)(?: (?:packageName|lookupName)=(?<packageName>.+?))?( versioning=(?<versioning>.+?))?\\s\\$?[A-Z0-9_]+?_VERSION\\s*=\\s*\"?(?<currentValue>.+?)\"?\\s",
+        "# renovate: datasource=(?<datasource>.+?)(?: (?:packageName|lookupName)=(?<packageName>.+?))?(?: versioning=(?<versioning>.+?))?\\sinstall-[a-z]+? (?<depName>[a-z0-9-]+?) (?<currentValue>.+?)\\s"
+      ]
+    },
+    {
+      "description": "nuspec files manager",
+      "fileMatch": ["\\.nuspec$"],
+      "matchStringsStrategy": "any",
+      "matchStrings": [
+        "<dependency\\s+id=\"(?<depName>.*?)\"\\s+version=\"(?<currentValue>.+?)\"\\s*\\/>"
+      ],
+      "datasourceTemplate": "nuget",
+      "versioningTemplate": "nuget"
+    }
+  ]
+}

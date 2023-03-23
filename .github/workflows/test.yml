@@ -1,0 +1,34 @@
+name: test
+
+on:
+  push:
+
+env:
+  LOG_LEVEL: debug
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    strategy:
+      matrix:
+        file:
+          - default
+          - automergePatch
+          - automergeDigest
+          - fixes
+          # - meta -> soureUrl not valid
+          - shared
+          - groups
+          - replacements
+          - ng
+          - vo
+    env:
+      RENOVATE_CONFIG_FILE: ${{ matrix.file }}.json
+
+    steps:
+      - uses: actions/checkout@24cb9080177205b6e8c946b17badbe402adc938f # v3.4.0
+
+      - name: testing ${{ matrix.file }}
+        run: npx -p renovate renovate-config-validator
