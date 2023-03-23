@@ -18,12 +18,10 @@ jobs:
           - automergePatch
           - automergeDigest
           - fixes
-          # - meta -> soureUrl not valid
           - shared
           - groups
           - replacements
           - ng
-          - vo
     env:
       RENOVATE_CONFIG_FILE: ${{ matrix.file }}.json
 
