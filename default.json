@@ -2,9 +2,8 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "github>modem7/renovate-config:shared",
-    "github>modem7/renovate-config:vo",
     ":dependencyDashboard",
-    ":assignee(viceice)",
+    ":assignee(modem7)",
     "helpers:pinGitHubActionDigests"
   ],
   "packageRules": [
