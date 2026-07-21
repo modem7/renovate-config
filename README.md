@@ -29,3 +29,13 @@ Add these alongside the default extend when a repo needs them:
 
 Repo-specific rules (e.g. version pins, path exclusions) belong in that repo's own
 `renovate.json`, extending this config rather than duplicating it.
+
+## Repo scaffolding
+
+This repo also carries the same `.github` scaffolding as my other repos:
+
+- `settings.yml` — repository metadata + the standard label set, applied by the
+  [Repository Settings App](https://github.com/apps/settings)
+- `workflows/autoassign.yml` — assigns new issues to `modem7`
+- `workflows/test.yml` — validates every preset file with `renovate-config-validator`
+- `CODEOWNERS`, `FUNDING.yml` — same as elsewhere
