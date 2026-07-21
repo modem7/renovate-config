@@ -1,0 +1,33 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Opt-in extras for repos that build a Docker image with an s6-overlay init system and ARG-pinned Alpine/Python base versions",
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Track the S6 Overlay version pinned in the Dockerfile ARG",
+      "managerFilePatterns": ["/^Dockerfile$/"],
+      "matchStrings": ["ARG S6_OVERLAY_VERSION=(?<currentValue>[0-9.]+)"],
+      "datasourceTemplate": "github-releases",
+      "packageNameTemplate": "just-containers/s6-overlay",
+      "extractVersionTemplate": "^v(?<version>.*)$"
+    },
+    {
+      "customType": "regex",
+      "description": "Track ARG ALPINE_VERSION / PYTHON_VERSION pins in the Dockerfile against the matching Docker Hub image",
+      "managerFilePatterns": ["/^Dockerfile$/"],
+      "matchStrings": [
+        "ARG (?<depName>ALPINE|PYTHON)_VERSION=(?<currentValue>[0-9.]+)"
+      ],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "loose",
+      "packageNameTemplate": "{{lowercase depName}}"
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "Track only major.minor for base OS/runtime images (avoid noisy patch bumps for floating tags)",
+      "matchDepNames": ["alpine", "python"],
+      "allowedVersions": "/^\\d+\\.\\d+$/"
+    }
+  ]
+}
