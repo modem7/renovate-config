@@ -3,7 +3,6 @@
   "extends": [
     "config:recommended",
     "docker:enableMajor",
-    "helpers:pinGitHubActionDigests",
     ":maintainLockFilesWeekly"
   ],
   "assignees": ["modem7"],
@@ -21,11 +20,6 @@
       "matchManagers": ["github-actions", "woodpecker"],
       "matchUpdateTypes": ["minor", "patch", "digest"],
       "automerge": true
-    },
-    {
-      "description": "Pin Dockerfile base image digests",
-      "matchManagers": ["dockerfile"],
-      "pinDigests": true
     }
   ],
   "customManagers": [

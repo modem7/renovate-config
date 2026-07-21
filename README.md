@@ -14,8 +14,9 @@ In a repo's `renovate.json`:
 ```
 
 This resolves to [`default.json`](default.json), which pulls in [`shared.json`](shared.json) —
-the common baseline: `config:recommended`, assignee/label/timezone, GitHub Action digest pinning,
-Dockerfile digest pinning, and automerge for low-risk CI plumbing updates.
+the common baseline: `config:recommended`, assignee/label/timezone, and automerge for low-risk CI
+plumbing updates. Dependencies are intentionally left unpinned (no digest pinning for GitHub
+Actions or Dockerfile base images) — updates land as normal version-bump PRs instead.
 
 ## Optional extras
 
