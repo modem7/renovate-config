@@ -17,11 +17,8 @@ jobs:
           - default
           - automergePatch
           - automergeDigest
-          - fixes
           - shared
-          - groups
-          - replacements
-          - ng
+          - docker
     env:
       RENOVATE_CONFIG_FILE: ${{ matrix.file }}.json
 
