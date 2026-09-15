@@ -4,6 +4,7 @@
     "config:recommended",
     ":maintainLockFilesWeekly"
   ],
+  "platformAutomerge": false,
   "assignees": ["modem7"],
   "labels": ["dependencies"],
   "timezone": "Europe/London",
